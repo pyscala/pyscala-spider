@@ -8,5 +8,5 @@ import org.apache.http.HttpResponse;
  * @date : 2017\12\28 0028
  */
 public interface Observer {
-    void afterRequest(HttpResponse response);
+    void afterRequest(RespContext response);
 }

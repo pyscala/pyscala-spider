@@ -80,8 +80,10 @@ public  class Spider {
                 HttpUriRequest request= req.getRequest();
                 url=request.getURI().toString();
                 HttpResponse response=client.execute(request,httpContext);
+                RespContext respContext=new RespContext();
+                respContext.setResponse(response);
                 log.info("execute ("+url+") success !");
-                req.setResponse(response);
+                req.setResponse(respContext);
                 Thread.sleep(3000);
             } catch (Exception e) {
                 log.info("execute ("+url+") failed !"+e);

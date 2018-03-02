@@ -21,7 +21,7 @@ public class Request implements Subject {
     @Getter
     private HttpUriRequest request;
 
-    private HttpResponse httpResponse;
+    private RespContext httpResponse;
 
 
 
@@ -47,7 +47,7 @@ public class Request implements Subject {
     }
 
     @Override
-    public void setResponse(HttpResponse response) {
+    public void setResponse(RespContext response) {
         this.httpResponse = response;
         this.notifyObserver();
     }
