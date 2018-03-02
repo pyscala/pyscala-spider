@@ -2,6 +2,7 @@ package com.learner.test;
 
 import com.learner.crawler.AbstractCrawler;
 import com.learner.spider.ParserObserver;
+import com.learner.spider.RespContext;
 import com.learner.spider.Spider;
 import com.learner.spider.SpiderManager;
 import com.learner.util.ContextUtil;
@@ -23,8 +24,8 @@ public class BaiduCrawler extends AbstractCrawler {
     public void getBaidu(){
         getUrl("https://baike.baidu.com/item/%E7%99%BE%E5%BA%A6%E7%99%BE%E7%A7%91/85895?fr=aladdin", null, new ParserObserver() {
             @Override
-            public void afterRequest(HttpResponse response) {
-                String cont= ContextUtil.getContext(response);
+            public void afterRequest(RespContext response) {
+                String cont= ContextUtil.getContext(response.getResponse());
                 log.info(cont);
             }
         });
