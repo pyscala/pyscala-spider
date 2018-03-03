@@ -10,6 +10,8 @@ import org.apache.http.client.protocol.HttpClientContext;
 @Data
 public class RespContext {
 
+    private String charset;
+
     private HttpResponse response;
 
     private HttpClientContext context;

@@ -51,22 +51,13 @@ public abstract class AbstractCrawler {
         spider.addRequest(request);
         log.info("GET: add request to spider...");
 
-//        HttpResponse response = null;
-//        try {
-//            response = client.execute(req);
-//        } catch (IOException e) {
-//            log.error("execute GET URL(" + url + ") :" + e);
-//        }
-////        this.addObserver(observer);
-//        request.setResponse(response);
-
     }
 
-    protected void postUtl(String url, String[][] headers, String[][] params, ParserObserver observer) {
+    protected void postUtl(String url,  String[][] params, String[][] headers,ParserObserver observer) {
         postUrl(url, headers, params, observer, new Site());
     }
 
-    protected void postUrl(String url, String[][] headers, String[][] params, ParserObserver observerss, Site site) {
+    protected void postUrl(String url,  String[][] params,String[][] headers, ParserObserver observerss, Site site) {
         if (url == null) {
             log.error("request.POST no url");
             return;
@@ -82,19 +73,10 @@ public abstract class AbstractCrawler {
 
         spider.addRequest(request);
         log.info("POST: add request to spider...");
-
-//        HttpResponse response = null;
-//        try {
-//            response = client.execute(req);
-//        } catch (IOException e) {
-//            log.error("execute POST URL(" + url + ") :" + e);
-//        }
-////        this.setResponse(response);
-//        request.setResponse(response);
     }
 
 
-    private HttpUriRequest setRequest(RequestBuilder builder, String url, String[][] headers, String[][] entity, Site site) {
+    private HttpUriRequest setRequest(RequestBuilder builder, String url, String[][] headers, String[][] params, Site site) {
         builder.setUri(url);
 
         if (headers != null && headers.length > 0) {
@@ -103,8 +85,8 @@ public abstract class AbstractCrawler {
             }
         }
         Site si=site!=null?site:spider.getSite();
-        if (entity != null && entity.length > 0) {
-            for (String[] ent : entity) {
+        if (params != null && params.length > 0) {
+            for (String[] ent : params) {
                 builder.addParameter(ent[0], ent[1]);
             }
         }
