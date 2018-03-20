@@ -41,9 +41,8 @@ public abstract class AbstractCrawler {
         Request request = new Request();
         log.info("GET: request init ...");
 
-        HttpUriRequest req = setRequest(RequestBuilder.get(), url, headers, null, site);
+        setRequest(request,RequestBuilder.get(), url, null,null,headers, site);
         log.info("GET: set request success...");
-        request.setRequest(req);
 
         request.addObserver(observer);
         log.info("GET: add observer to this request...");
@@ -53,20 +52,19 @@ public abstract class AbstractCrawler {
 
     }
 
-    protected void postUtl(String url,  String[][] params, String[][] headers,ParserObserver observer) {
-        postUrl(url, headers, params, observer, new Site());
+    protected void postUtl(String url,  String[][] params,Object [] objects, String[][] headers,ParserObserver observer) {
+        postUrl(url, headers,objects, params, observer, new Site());
     }
 
-    protected void postUrl(String url,  String[][] params,String[][] headers, ParserObserver observerss, Site site) {
+    protected void postUrl(String url,  String[][] params,Object [] objects,String[][] headers, ParserObserver observerss, Site site) {
         if (url == null) {
             log.error("request.POST no url");
             return;
         }
         Request request = new Request();
         log.info("POST: request init ...");
-        HttpUriRequest req = setRequest(RequestBuilder.post(), url, headers, params, site);
+        setRequest(request,RequestBuilder.post(), url, params,objects, headers, site);
         log.info("POST: set request success...");
-        request.setRequest(req);
 
         request.addObserver(observerss);
         log.info("POST: add observer to this request...");
@@ -76,7 +74,7 @@ public abstract class AbstractCrawler {
     }
 
 
-    private HttpUriRequest setRequest(RequestBuilder builder, String url, String[][] headers, String[][] params, Site site) {
+    private void setRequest(Request req,RequestBuilder builder, String url, String[][] params,Object [] objects,String[][] headers, Site site) {
         builder.setUri(url);
 
         if (headers != null && headers.length > 0) {
@@ -90,6 +88,15 @@ public abstract class AbstractCrawler {
                 builder.addParameter(ent[0], ent[1]);
             }
         }
+        if(objects!=null&& objects.length>0){
+            for (int i = 0; i < objects.length; i++) {
+                if(i==0){
+                    req.setResponseChatset(objects[0].toString());
+                }else if (i==1){
+
+                }
+            }
+        }
         if(si!=null) {
             RequestConfig.Builder requestConfigBuilder = RequestConfig.custom()
                     .setConnectionRequestTimeout(si.getTimeOut())
@@ -100,7 +107,7 @@ public abstract class AbstractCrawler {
         }
         builder.setCharset(Charset.defaultCharset());
         builder.setVersion(null);
-        return builder.build();
+        req.setRequest( builder.build());
     }
 
 

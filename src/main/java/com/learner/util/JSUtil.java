@@ -5,8 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -54,7 +52,6 @@ public class JSUtil {
         return null;
     }
     public static void main(String[] args) {
-        netscape.javascript.JSUtil jsUtil=new netscape.javascript.JSUtil();
 
         String js="function a(a,b,c){return a+b+c}";
         System.out.println(JSUtil.runResourceJs("/Users/liufangliang/IdeaProjects/common/src/a.js","a",1,2,3));

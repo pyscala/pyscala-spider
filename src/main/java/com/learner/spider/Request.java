@@ -20,7 +20,9 @@ public class Request implements Subject {
     @Setter
     @Getter
     private HttpUriRequest request;
-
+    @Setter
+    @Getter
+    private String responseChatset;
     private RespContext httpResponse;
 
 

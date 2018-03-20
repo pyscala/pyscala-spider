@@ -25,7 +25,7 @@ public class BaiduCrawler extends AbstractCrawler {
         getUrl("https://baike.baidu.com/item/%E7%99%BE%E5%BA%A6%E7%99%BE%E7%A7%91/85895?fr=aladdin", null, new ParserObserver() {
             @Override
             public void afterRequest(RespContext response) {
-                String cont= ContextUtil.getContext(response.getResponse());
+                String cont= ContextUtil.getString(response);
                 log.info(cont);
             }
         });
