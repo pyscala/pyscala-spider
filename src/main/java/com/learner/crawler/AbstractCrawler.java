@@ -28,6 +28,9 @@ public abstract class AbstractCrawler {
 
     private Spider spider;
 
+    public AbstractCrawler(Spider spider) {
+        this.spider = spider;
+    }
 
     protected void getUrl(String url, String[][] headers, ParserObserver observer) {
         getUrl(url, headers, observer, new Site());
