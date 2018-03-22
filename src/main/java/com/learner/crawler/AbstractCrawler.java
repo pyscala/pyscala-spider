@@ -8,7 +8,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import org.apache.http.client.config.RequestConfig;
-import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.methods.RequestBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,9 +27,14 @@ public abstract class AbstractCrawler {
 
     private Spider spider;
 
-    public AbstractCrawler(Spider spider) {
-        this.spider = spider;
+    public AbstractCrawler(){
+
     }
+
+    public AbstractCrawler(Spider spider){
+        this.spider=spider;
+    }
+
 
     protected void getUrl(String url, String[][] headers, ParserObserver observer) {
         getUrl(url, headers, observer, new Site());
