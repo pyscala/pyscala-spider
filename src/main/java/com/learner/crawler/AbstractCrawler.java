@@ -59,7 +59,7 @@ public abstract class AbstractCrawler {
 
     }
 
-    protected void postUtl(String url,  String[][] params,Object [] objects, String[][] headers,ParserObserver observer) {
+    protected void postUrl(String url,  String[][] params,Object [] objects, String[][] headers,ParserObserver observer) {
         postUrl(url, headers,objects, params, observer, new Site());
     }
 
