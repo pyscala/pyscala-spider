@@ -13,8 +13,7 @@ public abstract class ParserObserver implements Observer {
   public ParserObserver(){
 
   }
-  public void afterRequest(HttpResponse response){
 
-  }
+  public abstract void afterRequest(RespContext response);
 
 }

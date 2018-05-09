@@ -51,7 +51,7 @@ public class Request implements Subject {
     @Override
     public void setResponse(RespContext response) {
         this.httpResponse = response;
-        this.notifyObserver();
+//        this.notifyObserver();
     }
 
 }

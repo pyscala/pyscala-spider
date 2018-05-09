@@ -46,16 +46,16 @@ public abstract class AbstractCrawler {
             return;
         }
         Request request = new Request();
-        log.info("GET: request init ...");
+//        log.info("GET: request init ...");
 
         setRequest(request,RequestBuilder.get(), url, null,null,headers, site);
-        log.info("GET: set request success...");
+//        log.info("GET: set request success...");
 
         request.addObserver(observer);
-        log.info("GET: add observer to this request...");
+//        log.info("GET: add observer to this request...");
 
         spider.addRequest(request);
-        log.info("GET: add request to spider...");
+//        log.info("GET: add request to spider...");
 
     }
 
@@ -69,15 +69,15 @@ public abstract class AbstractCrawler {
             return;
         }
         Request request = new Request();
-        log.info("POST: request init ...");
+//        log.info("POST: request init ...");
         setRequest(request,RequestBuilder.post(), url, params,objects, headers, site);
-        log.info("POST: set request success...");
+//        log.info("POST: set request success...");
 
         request.addObserver(observerss);
-        log.info("POST: add observer to this request...");
+//        log.info("POST: add observer to this request...");
 
         spider.addRequest(request);
-        log.info("POST: add request to spider...");
+//        log.info("POST: add request to spider...");
     }
 
 

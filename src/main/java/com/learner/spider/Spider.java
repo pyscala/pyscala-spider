@@ -75,18 +75,24 @@ public  class Spider {
                 break;
             }
             String url=null;
+            HttpResponse response=null;
             try {
                 Request req=tasks.poll();
                 HttpUriRequest request= req.getRequest();
                 url=request.getURI().toString();
-                HttpResponse response=client.execute(request,httpContext);
+                response=client.execute(request,httpContext);
                 RespContext respContext=new RespContext();
                 respContext.setResponse(response);
                 log.info("execute ("+url+") success !");
                 req.setResponse(respContext);
-                Thread.sleep(3000);
+                req.notifyObserver();
+//                Thread.sleep(3000);
             } catch (Exception e) {
-                log.info("execute ("+url+") failed !"+e);
+                try {
+                    log.info("Faild: "+response.getStatusLine()+" execute ("+url+")"+e);
+                } catch (Exception e1) {
+                    log.info("error execute ("+url+")"+e);
+                }
             }
         }
     }
