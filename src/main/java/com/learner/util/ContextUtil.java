@@ -6,7 +6,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.learner.spider.RespContext;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.Charsets;
-import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
