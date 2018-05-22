@@ -6,12 +6,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.http.Header;
 import org.apache.http.HttpHeaders;
 import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.HttpRequestRetryHandler;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.methods.RequestBuilder;
 import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.DefaultHttpRequestRetryHandler;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.protocol.HttpContext;
@@ -38,13 +40,13 @@ public  class Spider {
 
     private Site site=new Site();
 
-    private  CloseableHttpClient client = getClient();
+    private HttpClient client ;
 
     public Spider(){
         init();
     }
-    private void init(){
 
+    private void init(){
         List<Header> headerList = new ArrayList();
         headerList.add(new BasicHeader(HttpHeaders.ACCEPT, "text/html,application/xhtml+xml,application/xml;q=0.9," +
                 "image/webp,image/apng,*/*;q=0.8"));
@@ -55,11 +57,12 @@ public  class Spider {
         headerList.add(new BasicHeader(HttpHeaders.CONNECTION, "keep-alive"));
         headerList.add(new BasicHeader(HttpHeaders.ACCEPT_LANGUAGE, "zh-CN,zh;q=0.8,en;q=0.6,zh-TW;q=0.4,ja;q=0.2," +
                 "de;q=0.2"));
-        client= HttpClients.custom().setDefaultHeaders(headerList).build();
+        client= HttpClients.custom().setRetryHandler(new DefaultHttpRequestRetryHandler(5,true)).setDefaultHeaders(headerList).build();
     }
-    private HttpContext httpContext= HttpClientContext.create();
+    private HttpClientContext httpContext= HttpClientContext.create();
 
-    private BlockingQueue<Request> tasks=new ArrayBlockingQueue<Request>(50);
+
+    private BlockingQueue<Request> tasks=new ArrayBlockingQueue<Request>(10000);
 
     public void addRequest(Request request){
         tasks.add(request);
@@ -86,7 +89,7 @@ public  class Spider {
                 log.info("execute ("+url+") success !");
                 req.setResponse(respContext);
                 req.notifyObserver();
-//                Thread.sleep(3000);
+                Thread.sleep((int)(Math.random()*3000));
             } catch (Exception e) {
                 try {
                     log.info("Faild: "+response.getStatusLine()+" execute ("+url+")"+e);
@@ -101,8 +104,8 @@ public  class Spider {
 
         if(client!=null){
             try {
-                client.close();
-            } catch (IOException e) {
+//                client.close();
+            } catch (Exception e) {
                 log.error("httpclient close error !"+e);
             }
 

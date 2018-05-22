@@ -33,7 +33,7 @@ public class ContextUtil {
             } else {
                 cont = EntityUtils.toString(entity, charset);
             }
-            EntityUtils.consumeQuietly(entity);
+//            EntityUtils.consumeQuietly(entity);
             return cont;
         } catch (Exception e) {
             log.error("getContext err :" + e);

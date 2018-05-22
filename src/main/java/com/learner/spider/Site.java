@@ -12,5 +12,6 @@ public class Site {
 
     private String host;
     private String orign;
+    private Integer retry;
 
 }
