@@ -4,18 +4,16 @@ import com.learner.spider.ParserObserver;
 import com.learner.spider.Request;
 import com.learner.spider.Site;
 import com.learner.spider.Spider;
-import com.sun.tools.javac.comp.Todo;
-import com.sun.xml.internal.bind.v2.TODO;
 import lombok.Getter;
 import lombok.Setter;
 
-import org.apache.http.HttpHost;
-import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.RequestBuilder;
+import org.apache.http.entity.StringEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 
 
@@ -64,7 +62,10 @@ public abstract class AbstractCrawler {
     }
 
     protected void postUrl(String url, String[][] params, Object[] objects, String[][] headers, ParserObserver observer) {
-        postUrl(url, headers, objects, params, observer, new Site());
+        postUrl(url, params, objects, headers, observer, new Site());
+    }
+    protected void postUrl(String url, Object[] objects, String[][] headers, ParserObserver observer) {
+        postUrl(url, null, objects, headers, observer, new Site());
     }
 
     protected void postUrl(String url, String[][] params, Object[] objects, String[][] headers, ParserObserver observerss, Site site) {
@@ -101,9 +102,17 @@ public abstract class AbstractCrawler {
         if (objects != null && objects.length > 0) {
             for (int i = 0; i < objects.length; i++) {
                 if (i == 0) {
+                    // 设置返回页面的编码
                     req.setResponseChatset(objects[0].toString());
                 } else if (i == 1) {
                     // TODO: 2018/5/14
+                    try {
+                        //json 请求的内容
+                        StringEntity str=new StringEntity(objects[1].toString());
+                        builder.setEntity(str);
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }
