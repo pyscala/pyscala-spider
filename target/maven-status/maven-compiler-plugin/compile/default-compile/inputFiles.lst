@@ -1,0 +1,12 @@
+/Users/liufangliang/IdeaProjects/pyscala-spider/src/main/java/com/learner/spider/ParserObserver.java
+/Users/liufangliang/IdeaProjects/pyscala-spider/src/main/java/com/learner/spider/Spider.java
+/Users/liufangliang/IdeaProjects/pyscala-spider/src/main/java/com/learner/test/BaiduCrawler.java
+/Users/liufangliang/IdeaProjects/pyscala-spider/src/main/java/com/learner/spider/Subject.java
+/Users/liufangliang/IdeaProjects/pyscala-spider/src/main/java/com/learner/util/ContextUtil.java
+/Users/liufangliang/IdeaProjects/pyscala-spider/src/main/java/com/learner/spider/SpiderManager.java
+/Users/liufangliang/IdeaProjects/pyscala-spider/src/main/java/com/learner/spider/Request.java
+/Users/liufangliang/IdeaProjects/pyscala-spider/src/main/java/com/learner/crawler/AbstractCrawler.java
+/Users/liufangliang/IdeaProjects/pyscala-spider/src/main/java/com/learner/spider/Site.java
+/Users/liufangliang/IdeaProjects/pyscala-spider/src/main/java/com/learner/util/JSUtil.java
+/Users/liufangliang/IdeaProjects/pyscala-spider/src/main/java/com/learner/spider/Observer.java
+/Users/liufangliang/IdeaProjects/pyscala-spider/src/main/java/com/learner/spider/RespContext.java
